@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+verify_ssl = true
+
+[dev-packages]
+ipython = "*"
+
+[packages]
+django = "==1.11.29"
+mysql-connector-python = "*"
+pipfile = "*"
+
+[requires]
+python_version = "3.7"

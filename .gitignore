@@ -1,0 +1,7 @@
+.python-version
+Pipfile.lock
+.vscode
+migrations
+__pycache__
+*.pyc
+*.sqlite3
