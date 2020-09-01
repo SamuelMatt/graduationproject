@@ -7,4 +7,7 @@ app_name = 'blog'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^post/(?P<id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^archives/(?P<year>[0-9]{4})/(?P<month>[0-9]{1,2})/$', views.archive, name='archives'),
+    url(r'^category/(?P<id>[0-9]+)/$', views.category, name='category'),
+    url(r'^tag/(?P<id>[0-9]+)/$', views.tag, name='tag'),
 ]
