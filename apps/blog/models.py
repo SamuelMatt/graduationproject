@@ -35,7 +35,6 @@ class Post(models.Model):
     title = models.CharField(max_length=100, verbose_name='标题')
     body = models.TextField(verbose_name='正文')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    modified_time = models.DateTimeField(auto_now_add=True, verbose_name='修改时间')
     excerpt = models.CharField(max_length=200, blank=True, verbose_name='摘要')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='分类')
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='标签')
@@ -50,8 +49,6 @@ class Post(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.modified_time = timezone.now()
-
         md = markdown.Markdown(extensions=(
             'markdown.extensions.extra',
             'markdown.extensions.codehilite',
