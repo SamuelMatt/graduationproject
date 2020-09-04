@@ -16,6 +16,9 @@ def index(request):
 
 def detail(request, id):
     post = get_object_or_404(Post, id=id)
+
+    post.increase_view()
+
     md = markdown.Markdown(extensions=(
         'markdown.extensions.extra',
         'markdown.extensions.codehilite',

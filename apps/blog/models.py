@@ -39,6 +39,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name='分类')
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='标签')
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='作者')
+    view = models.PositiveIntegerField(default=0, editable=False, verbose_name='阅读')
 
     class Meta:
         verbose_name = "文章"
@@ -59,3 +60,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:detail', kwargs={'id': self.id})
+
+    def increase_view(self):
+        self.view += 1
+        self.save(update_fields=['view'])
