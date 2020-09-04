@@ -1,5 +1,7 @@
+from django.views.generic import ListView, DetailView
 from django.shortcuts import render, get_object_or_404
 from django.utils.text import slugify
+
 import re
 import markdown
 from markdown.extensions.toc import TocExtension
@@ -9,44 +11,51 @@ from .models import Category, Tag, Post
 # Create your views here.
 
 
-def index(request):
-    post_list = Post.objects.all().order_by('-created_time')
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+class IndexView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'post_list'
 
 
-def detail(request, id):
-    post = get_object_or_404(Post, id=id)
-
-    post.increase_view()
-
-    md = markdown.Markdown(extensions=(
-        'markdown.extensions.extra',
-        'markdown.extensions.codehilite',
-        TocExtension(slugify=slugify),
-    ))
-    post.body = md.convert(post.body)
-
-    m = re.search(r'<div class="toc">\s*<ul>(.*)</ul>\s*</div>', md.toc, re.S)
-    post.toc = m.group(1) if m is not None else ''
-
-    return render(request, 'blog/detail.html', context={'post': post})
+class ArchiveView(IndexView):
+    def get_queryset(self):
+        year = self.kwargs.get('year')
+        month = self.kwargs.get('month')
+        return (
+            super().get_queryset().filter(created_time__year=year, created_time__month=month)
+        )
 
 
-def category(request, id):
-    cate = get_object_or_404(Category, id=id)
-    post_list = Post.objects.filter(category=cate).order_by('-created_time')
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+class CategoryView(IndexView):
+    def get_queryset(self):
+        cate = get_object_or_404(Category, pk=self.kwargs.get('pk'))
+        return super().get_queryset().filter(category=cate)
 
 
-def tag(request, id):
-    t = get_object_or_404(Tag, id=id)
-    post_list = Post.objects.filter(tags=t).order_by('-created_time')
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+class TagView(IndexView):
+    def get_queryset(self):
+        t = get_object_or_404(Tag, pk=self.kwargs.get("pk"))
+        return super().get_queryset().filter(tags=t)
 
 
-def archive(request, year, month):
-    post_list = Post.objects.filter(
-        created_time__year=year,
-        created_time__month=month,
-        ).order_by('-created_time')
-    return render(request, 'blog/index.html', context={'post_list': post_list})
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/detail.html'
+    context_object_name = 'post'
+
+    def get(self, request, *args, **kwargs):
+        response = super().get(request, *args, **kwargs)
+        self.object.increase_view()
+        return response
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset=None)
+
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            TocExtension(slugify=slugify),
+        ])
+        post.body = md.convert(post.body)
+        post.toc = md.toc
+        return post

@@ -59,7 +59,7 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('blog:detail', kwargs={'id': self.id})
+        return reverse('blog:detail', kwargs={'pk': self.pk})
 
     def increase_view(self):
         self.view += 1

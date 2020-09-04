@@ -9,8 +9,8 @@ from apps.blog.models import Post
 
 
 @require_POST
-def comment(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+def comment(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk)
     form = CommentForm(request.POST)
 
     if form.is_valid():
