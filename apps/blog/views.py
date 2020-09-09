@@ -67,14 +67,3 @@ class PostDetailView(DetailView):
         self.object.increase_view()
         return response
 
-    def get_object(self, queryset=None):
-        post = super().get_object(queryset=None)
-
-        md = markdown.Markdown(extensions=[
-            'markdown.extensions.extra',
-            'markdown.extensions.codehilite',
-            TocExtension(slugify=slugify),
-        ])
-        post.body = md.convert(post.body)
-        post.toc = md.toc
-        return post
