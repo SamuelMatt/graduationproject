@@ -2,6 +2,7 @@ from django.views.generic import ListView, DetailView
 from django.shortcuts import render, get_object_or_404
 from django.utils.text import slugify
 
+from pure_pagination.mixins import PaginationMixin
 import re
 import markdown
 from markdown.extensions.toc import TocExtension
@@ -11,10 +12,11 @@ from .models import Category, Tag, Post
 # Create your views here.
 
 
-class IndexView(ListView):
+class IndexView(PaginationMixin, ListView):
     model = Post
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
+    paginate_by = 10
 
 
 class ArchiveView(IndexView):

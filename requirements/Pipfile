@@ -12,6 +12,8 @@ django = "==1.11.29"
 mysql-connector-python = "*"
 pipfile = "*"
 markdown = "*"
+django-pure-pagination = "*"
+django-xadmin = "*"
 
 [requires]
 python_version = "3.7"
