@@ -6,7 +6,6 @@ from django.utils.html import strip_tags
 from django.utils.text import slugify
 from django.utils.functional import cached_property
 
-import re
 import markdown
 from markdown.extensions.toc import TocExtension
 

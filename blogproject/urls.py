@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'', include('apps.blog.urls')),
     url(r'', include('apps.comment.urls')),
 
-    url(r'all/rss/', AllPostsRssFeed(), name='rss'),
+    url(r'^all/rss/$', AllPostsRssFeed(), name='rss'),
 ]
