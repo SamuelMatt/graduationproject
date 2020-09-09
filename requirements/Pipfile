@@ -1,10 +1,11 @@
 [[source]]
-name = "pypi"
+name = "tuna"
 url = "https://pypi.tuna.tsinghua.edu.cn/simple"
 verify_ssl = true
 
 [dev-packages]
 ipython = "*"
+faker = "*"
 
 [packages]
 django = "==1.11.29"

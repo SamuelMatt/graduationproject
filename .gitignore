@@ -1,7 +1,8 @@
 .python-version
 Pipfile.lock
+.idea
 .vscode
-migrations
 __pycache__
 *.pyc
+migrations
 *.sqlite3
