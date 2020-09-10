@@ -12,10 +12,10 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost',]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'mysql.connector.django',
         'NAME': 'blogproject',
-        'USER': '',
-        'PASSWORD': '*',
+        'USER': 'matt',
+        'PASSWORD': 'mojiezuo1991',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
