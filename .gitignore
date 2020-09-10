@@ -1,8 +1,10 @@
 .python-version
-Pipfile.lock
 .idea
 .vscode
 __pycache__
 *.pyc
 migrations
 *.sqlite3
+*.log
+*.pid
+*.lock
