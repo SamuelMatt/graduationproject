@@ -9,11 +9,13 @@ faker = "*"
 
 [packages]
 django = "==1.11.29"
+django-redis = "==4.11.0"
+django-pure-pagination = "*"
 mysql-connector-python = "*"
+hiredis = "*"
+gunicorn = "*"
 pipfile = "*"
 markdown = "*"
-django-pure-pagination = "*"
-gunicorn = "*"
 
 [requires]
 python_version = "3.7"
