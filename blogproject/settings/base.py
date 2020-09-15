@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django_static_jquery3',
+    'bootstrap3',
     'pure_pagination',
 
     'apps.blog',

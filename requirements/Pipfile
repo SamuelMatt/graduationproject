@@ -10,6 +10,8 @@ faker = "*"
 [packages]
 django = "==1.11.29"
 django-redis = "==4.11.0"
+django-static-jquery3 = "*"
+django-bootstrap3 = "12.1.0"
 django-pure-pagination = "*"
 mysql-connector-python = "*"
 hiredis = "*"
