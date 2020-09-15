@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'pure_pagination',
 
+    'apps.user',
     'apps.blog',
     'apps.comment',
 ]
